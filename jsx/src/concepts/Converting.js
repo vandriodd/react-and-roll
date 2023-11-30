@@ -2,13 +2,6 @@
 // ! Remember, HTML attributes ≠ JSX props
 // Names/values of attributes are camelCased in JSX
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-
-const el = document.getElementById('root');
-
-const root = ReactDOM.createRoot(el);
-
 // In JSX:
 function App() {
   // 1) Prop names are camelCased
@@ -32,4 +25,4 @@ function App() {
   // JSX → <div style={{ backgroundColor: 'red' }} />
 }
 
-root.render(<App />);
+export default App;

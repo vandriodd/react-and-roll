@@ -1,12 +1,5 @@
 // ↓ 16. Typical Component Layouts ↓
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-
-const el = document.getElementById('root');
-
-const root = ReactDOM.createRoot(el);
-
 function App() {
   // Code to compute values we want to show in our JSX
   const name = 'Luz';
@@ -20,4 +13,4 @@ function App() {
   );
 }
 
-root.render(<App />);
+export default App;

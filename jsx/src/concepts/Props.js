@@ -1,13 +1,6 @@
 // ↓ 17. Customizing elements with Props ↓
 // ! HTML attributes ≠ JSX props
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-
-const el = document.getElementById('root');
-
-const root = ReactDOM.createRoot(el);
-
 // JSX props features:
 function App() {
   // - Can refer to a variable using curly braces
@@ -49,4 +42,4 @@ function App() {
   )
 }
 
-root.render(<App />);
+export default App;
