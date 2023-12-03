@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Animals Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This basic React project, "animals", showcases fundamental concepts such as event handling, state management, and list rendering. The main functionality involves generating a random animal, adding it to a list, and allowing users to express their liking for the animal by clicking on a heart icon to increase its size.
 
-## Available Scripts
+## Concepts practiced/learned
 
-In the project directory, you can run:
+### Event System
 
-### `npm start`
+React employs a synthetic event system to handle browser events consistently. In this project, I utilize event handling to capture user interactions, such as clicking the heart icon.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```javascript
+const handleClick = () => {
+  // Code to handle click event
+};
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### State System
 
-### `npm test`
+React components have a built-in state system to manage dynamic data. The project uses state to keep track of the generated animals and their respective likes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```javascript
+const [animals, setAnimals] = useState([]);
+```
 
-### `npm run build`
+### Event Handlers
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Event handlers are functions that respond to specific events. In this project, the handleHeartClick function is an event handler triggered by a click on the heart icon.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```javascript
+const handleHeartClick = () => {
+  // Code to handle click event
+};
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### State
 
-### `npm run eject`
+The state represents the current condition of a component. The project utilizes state to manage the list of animals dynamically.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```javascript
+const [animals, setAnimals] = useState([]);
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Re-rendering process
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+React components re-render when there is a change in their state or props. The addition of a new animal triggers a re-render to update the displayed list.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+const addAnimalToList = () => {
+  setAnimals([...animals, newAnimal]);
+};
+```
 
-## Learn More
+### Array destructuring
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Array destructuring allows extracting values from arrays. Here, it is used to update the state with a new animal added to the existing list.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+const addAnimalToList = () => {
+  setAnimals([...animals, newAnimal]);
+};
+```
 
-### Code Splitting
+### List building
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+List building involves dynamically rendering components based on an array of data. In this project, the list of animals is built using the map function.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```javascript
+{
+  animals.map((animal, index) => (
+    <Animal key={index} animal={animal} onHeartClick={handleHeartClick} />
+  ));
+}
+```
