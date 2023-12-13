@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./SearchBar.css";
 
 // !NOPE This is not the way to do it
 // because SearchBar and ImageList are siblings
@@ -37,8 +38,9 @@ function SearchBar({ onSubmit }) {
 
   // 4 - pass the state to the input as value prop
   return (
-    <div>
+    <div className="search-bar">
       <form onSubmit={handleFormSubmit}>
+        <label>Enter Search Term</label>
         <input value={term} onChange={handleChange} />
       </form>
     </div>
