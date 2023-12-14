@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Pics React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This React application, named "pics," utilizes the [Unsplash API](https://unsplash.com/developers) to fetch and display images based on user queries. The project focuses on implementing key React concepts for handling text inputs, communication between parent and child components, and handling list updates.
 
-## Available Scripts
+## Concepts Implemented
 
-In the project directory, you can run:
+### 1. Handling Text Inputs / Form Control
 
-### `npm start`
+In the SearchBar component, the user's input is managed using the `useState` hook to maintain the input state. The `handleFormSubmit` function prevents the default form submission behavior and calls the `onSubmit` prop function with the current search term.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> [!NOTE]
+> This approach ensures that the input value is under the control of the React state system rather than being solely managed by the browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```jsx
+// Example from SearchBar.js
+const SearchBar = ({ onSubmit }) => {
+  const [term, setTerm] = useState('');
 
-### `npm test`
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(term);
+  };
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  const handleChange = (e) => {
+    setTerm(e.target.value);
+  };
 
-### `npm run build`
+  // ...
+};
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Communication Between Parent & Child Components
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The App component serves as the parent, and the SearchBar component as the child. The parent passes a callback function (handleSubmit) to the child via props, enabling communication from child to parent when a search term is submitted.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```jsx
+// Example from App.js
+const App = () => {
+  const [images, setImages] = useState([]);
 
-### `npm run eject`
+  const handleSubmit = async (term) => {
+    const result = await searchImages(term);
+    setImages(result);
+  };
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  return (
+    <div>
+      <SearchBar onSubmit={handleSubmit} />
+      {/* ... */}
+    </div>
+  );
+};
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 3. Handling List Updates with Keys
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+In the ImageList component, each rendered image is assigned a unique key using the `image.id` property. This ensures efficient updates and rendering of the list when new images are fetched.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```jsx
+// Example from ImageList.js
+const ImageList = ({ images }) => {
+  const renderedImages = images.map((image) => {
+    return (
+      <ImageShow
+        key={image.id}
+        image={image}
+      />
+    );
+  });
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  // ...
+};
+```

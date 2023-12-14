@@ -1,7 +1,7 @@
-import { useState } from "react";
-import SearchBar from "./components/SearchBar";
-import ImageList from "./components/ImageList";
-import searchImages from "./api";
+import { useState } from 'react';
+import SearchBar from './components/SearchBar';
+import ImageList from './components/ImageList';
+import searchImages from './api';
 
 // Child to Parent communication is possible
 // by using callbacks (from the Parent component)

@@ -1,5 +1,5 @@
-import ImageShow from "./ImageShow";
-import "./ImageList.css";
+import ImageShow from './ImageShow';
+import './ImageList.css';
 
 // From the perspective of this component (ImageList), 'images' is a props
 // * Handling List Updates
@@ -29,10 +29,15 @@ import "./ImageList.css";
 // or we can generate a unique id by ourselves
 function ImageList({ images }) {
   const renderedImages = images.map((image) => {
-    return <ImageShow key={image.id} image={image} />
+    return (
+      <ImageShow
+        key={image.id}
+        image={image}
+      />
+    );
   });
 
-  return <div className="image-list">{renderedImages}</div>
+  return <div className='image-list'>{renderedImages}</div>;
 }
 
 export default ImageList;
