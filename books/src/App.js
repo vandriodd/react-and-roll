@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import BookCreate from './components/BookCreate';
+import { useState } from "react";
+import BookCreate from "./components/BookCreate";
+import BookList from "./components/BookList";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -20,15 +21,36 @@ function App() {
     // - Copy all the elements from old array (...books)
     // - Add a new element to end
     // Now, React sees that the reference to state has changed, so it re-renders successfully!
-    const updatedBooks = [...books, { id: Math.random(), title: title }];
+    const updatedBooks = [
+      ...books,
+      { id: Math.round(Math.random() * 9999), title: title },
+    ];
 
     setBooks(updatedBooks);
   };
 
+  // Removing a book from the list
+  const deleteBookById = (idToRemove) => {
+    const updatedBooks = books.filter((book) => {
+      return book.id !== idToRemove;
+    });
+
+    setBooks(updatedBooks);
+  };
+
+  // Editing a book title from the list
+  const editBookById = (idToEdit, newTitle) => {
+    const updatedBookTitle = books.map((book) => {
+      book.id === idToEdit ? { ...book, title: newTitle } : book;
+    });
+    setBooks(updatedBookTitle);
+  };
+
   return (
-    <div className='App'>
+    <div className="app">
       {/* And it's for it that this snippet doesn't show the new book */}
       {/* {books.length} */}
+      <BookList books={books} onDelete={deleteBookById} onEdit={editBookById} />
       <BookCreate onCreate={createBook} />
     </div>
   );
