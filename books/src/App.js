@@ -1,6 +1,6 @@
-import { useState } from "react";
-import BookCreate from "./components/BookCreate";
-import BookList from "./components/BookList";
+import { useState } from 'react';
+import BookCreate from './components/BookCreate';
+import BookList from './components/BookList';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -41,16 +41,21 @@ function App() {
   // Editing a book title from the list
   const editBookById = (idToEdit, newTitle) => {
     const updatedBookTitle = books.map((book) => {
-      book.id === idToEdit ? { ...book, title: newTitle } : book;
+      return book.id === idToEdit ? { ...book, title: newTitle } : book;
     });
     setBooks(updatedBookTitle);
   };
 
   return (
-    <div className="app">
+    <div className='app'>
       {/* And it's for it that this snippet doesn't show the new book */}
       {/* {books.length} */}
-      <BookList books={books} onDelete={deleteBookById} onEdit={editBookById} />
+      <h1>Reading List</h1>
+      <BookList
+        books={books}
+        onDelete={deleteBookById}
+        onEdit={editBookById}
+      />
       <BookCreate onCreate={createBook} />
     </div>
   );
