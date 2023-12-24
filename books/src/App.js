@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import axios from 'axios';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
 
 function App() {
   const [books, setBooks] = useState([]);
 
-  const createBook = (title) => {
+  const createBook = async (title) => {
     // ! BAD CODE
     // React remembers the books array state (useState([]))
     // Push modifies the existing array, JS finds the array and modifies it
@@ -21,12 +22,23 @@ function App() {
     // - Copy all the elements from old array (...books)
     // - Add a new element to end
     // Now, React sees that the reference to state has changed, so it re-renders successfully!
+
+    // * Solution implementing data persistence
+
+    // Syntax: axios.method(url[, data[, config]])
+    const response = await axios.post('http://localhost:3001/books', {
+      title,
+    });
+
     const updatedBooks = [
       ...books,
-      { id: Math.round(Math.random() * 9999), title: title },
+      // now, we don't need to create the obj manually
+      // { id: Math.round(Math.random() * 9999), title: title },
+      response.data,
     ];
 
     setBooks(updatedBooks);
+    console.log(response);
   };
 
   // Removing a book from the list
