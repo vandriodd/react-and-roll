@@ -1,10 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
 
 function App() {
   const [books, setBooks] = useState([]);
+
+  // Fetching books from the server
+  const fetchBooks = async () => {
+    const response = await axios.get('http://localhost:3001/books');
+
+    setBooks(response.data);
+  };
+
+  // when we should fetch the books?
+
+  // ! DONT DO THIS
+  // Because it will be called every time the component is rendered
+  // so, we end up with an infinite loop
+  // fetchBooks();
+
+  // ! DO THIS
+  // useEffect is a hook that allows us to run some code when the component is
+  // initially rendered or (sometimes) when the component is updated
+  // useEffect(() => {effect function}, [dependency array])
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  // examples of dependency array
+  // useEffect(() => {}, []); // run only once when the component is initially rendered
+  // useEffect(() => {}); // run every time the component is rendered
+  // useEffect(() => {}, [books]); // run only when the books array changes
+  // useEffect(() => {}, [books.length]); // run only when the length of books array changes
+  // useEffect(() => {}, [books, books.length]); // run only when the books array or its length changes
+  // and so on...
 
   const createBook = async (title) => {
     // ! BAD CODE
@@ -42,7 +72,9 @@ function App() {
   };
 
   // Removing a book from the list
-  const deleteBookById = (idToRemove) => {
+  const deleteBookById = async (idToRemove) => {
+    axios.delete(`http://localhost:3001/books/${idToRemove}`);
+
     const updatedBooks = books.filter((book) => {
       return book.id !== idToRemove;
     });
@@ -51,9 +83,18 @@ function App() {
   };
 
   // Editing a book title from the list
-  const editBookById = (idToEdit, newTitle) => {
+  const editBookById = async (idToEdit, newTitle) => {
+    const response = await axios.put(
+      `http://localhost:3001/books/${idToEdit}`,
+      {
+        title: newTitle,
+      }
+    );
+
+    // Using the response from server to update the state
+    // ...response.data -> copy all properties from the response.data obj
     const updatedBookTitle = books.map((book) => {
-      return book.id === idToEdit ? { ...book, title: newTitle } : book;
+      return book.id === idToEdit ? { ...book, ...response.data } : book;
     });
     setBooks(updatedBookTitle);
   };
