@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 // now I only need to import the Provider component
-import { Provider } from './context/book';
+import { Provider } from './context/books';
 
 const el = document.getElementById('root');
 const root = ReactDOM.createRoot(el);
