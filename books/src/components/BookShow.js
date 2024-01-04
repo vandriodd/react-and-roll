@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import BooksContext from '../context/books';
 import BookEdit from './BookEdit';
 
 // Recieve props from BookList.js (book)
-function BookShow({ book, onDelete, onEdit }) {
+function BookShow({ book }) {
   // the default value is 'false' because we want to show the book's title (reasons in BookEdit.js)
   const [showEdit, setShowEdit] = useState(false);
   // const [editInput, setEditInput] = useState("");
+  const { deleteBookById } = useContext(BooksContext);
 
   const handleDeleteClick = () => {
-    onDelete(book.id);
+    deleteBookById(book.id);
   };
 
   const handleEditClick = () => {
@@ -30,7 +32,6 @@ function BookShow({ book, onDelete, onEdit }) {
         book={book}
         // So, if we use the handleSubmit function, we don't need to pass the onEdit function
         // onSubmit={handleSubmit}
-        onEdit={onEdit}
         hideEdit={() => setShowEdit(false)} // another way to handle showEdit state
       />
     );

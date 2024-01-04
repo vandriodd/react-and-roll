@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import BooksContext from '../context/books';
 
 // Clicking the pencil icon will toggle the edit form
 // showEdit === false => display book's title
@@ -6,6 +7,7 @@ import { useState } from 'react';
 
 function BookEdit({ book, onEdit, hideEdit }) {
   const [title, setTitle] = useState(book.title);
+  const { editBookById } = useContext(BooksContext);
 
   const handleChange = (e) => {
     setTitle(e.target.value);
@@ -17,7 +19,9 @@ function BookEdit({ book, onEdit, hideEdit }) {
     // If we use handleSubmit in BookShow, we don't need to pass the onEdit function
     // otherwise, we need it
     // onSubmit(book.id, title);
-    onEdit(book.id, title);
+    // we still use the onEdit function cuz we need to tell BookShow
+    // when it needs to close the edit form, but we actually edit the book in editBookById
+    editBookById(book.id, title);
     hideEdit();
   };
 

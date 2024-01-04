@@ -101,8 +101,16 @@ function Provider({ children }) {
   //   incrementCount: () => setCount(count + 1),
   // };
 
+  const valueToShare = {
+    books,
+    deleteBookById,
+    editBookById,
+    createBook,
+    fetchBooks,
+  };
+
   return (
-    <BooksContext.Provider value={{}}>
+    <BooksContext.Provider value={valueToShare}>
       {children} {/* This means that I can pass any component as a child */}
     </BooksContext.Provider>
   );
