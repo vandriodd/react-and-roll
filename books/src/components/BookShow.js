@@ -1,13 +1,13 @@
-import { useState, useContext } from 'react';
-import BooksContext from '../context/books';
+import { useState } from 'react';
 import BookEdit from './BookEdit';
+import useBookContext from '../hooks/use-books-context';
 
 // Recieve props from BookList.js (book)
 function BookShow({ book }) {
   // the default value is 'false' because we want to show the book's title (reasons in BookEdit.js)
   const [showEdit, setShowEdit] = useState(false);
   // const [editInput, setEditInput] = useState("");
-  const { deleteBookById } = useContext(BooksContext);
+  const { deleteBookById } = useBookContext();
 
   const handleDeleteClick = () => {
     deleteBookById(book.id);

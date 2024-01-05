@@ -64,7 +64,6 @@ function Provider({ children }) {
     ];
 
     setBooks(updatedBooks);
-    console.log(response);
   };
 
   // Removing a book from the list

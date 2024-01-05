@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import BooksContext from '../context/books';
+import useBookContext from '../hooks/use-books-context';
 import BookShow from './BookShow';
 
 // Recieves props from App.js (books)
 function BookList() {
-  const { books } = useContext(BooksContext);
+  const { books } = useBookContext();
   // const value = useContext(BooksContext); // value stored in context
   // const { count, incrementCount } = useContext(BooksContext); // destructuring cuz now is an obj
 

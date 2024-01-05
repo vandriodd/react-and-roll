@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
-import BooksContext from '../context/books';
+import { useState } from 'react';
+import useBookContext from '../hooks/use-books-context';
 
 // Clicking the pencil icon will toggle the edit form
 // showEdit === false => display book's title
@@ -7,7 +7,7 @@ import BooksContext from '../context/books';
 
 function BookEdit({ book, onEdit, hideEdit }) {
   const [title, setTitle] = useState(book.title);
-  const { editBookById } = useContext(BooksContext);
+  const { editBookById } = useBookContext();
 
   const handleChange = (e) => {
     setTitle(e.target.value);
