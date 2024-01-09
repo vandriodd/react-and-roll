@@ -1,31 +1,39 @@
 import './index.css'
+import { GoBell } from 'react-icons/go'
 import Button from './components/Button'
 
 function App () {
+  const handleClick = () => {
+    console.log('click')
+  }
+
   return (
     <main>
       <div>
         <h1>App</h1>
-        <Button primary>Primary</Button>
-        <Button secondary>Secondary</Button>
-        <Button success>Success</Button>
-        <Button warning>Warning</Button>
-        <Button danger>Danger</Button>
-        <Button primary rounded>Primary rounded</Button>
-        <Button secondary rounded>Secondary rounded</Button>
-        <Button success rounded>Success rounded</Button>
-        <Button warning rounded>Warning rounded</Button>
-        <Button danger rounded>Danger rounded</Button>
-        <Button primary outline>Primary outline</Button>
-        <Button secondary outline>Secondary outline</Button>
-        <Button success outline>Success outline</Button>
-        <Button warning outline>Warning outline</Button>
-        <Button danger outline>Danger outline</Button>
-        <Button primary outline rounded>Primary outline rounded</Button>
-        <Button secondary outline rounded>Secondary outline rounded</Button>
-        <Button success outline rounded>Success outline rounded</Button>
-        <Button warning outline rounded>Warning outline rounded</Button>
-        <Button danger outline rounded>Danger outline rounded</Button>
+        <Button primary onClick={handleClick}>
+          <GoBell />
+          Primary
+        </Button>
+        <Button secondary onClick={handleClick}>Secondary</Button>
+        <Button success onClick={handleClick}>Success</Button>
+        <Button warning onClick={handleClick}>Warning</Button>
+        <Button danger onClick={handleClick}>Danger</Button>
+        <Button primary rounded onClick={handleClick}>Primary rounded</Button>
+        <Button secondary rounded onClick={handleClick}>Secondary rounded</Button>
+        <Button success rounded onClick={handleClick}>Success rounded</Button>
+        <Button warning rounded onClick={handleClick}>Warning rounded</Button>
+        <Button danger rounded onClick={handleClick}>Danger rounded</Button>
+        <Button primary outline onClick={handleClick}>Primary outline</Button>
+        <Button secondary outline onClick={handleClick}>Secondary outline</Button>
+        <Button success outline onClick={handleClick}>Success outline</Button>
+        <Button warning outline onClick={handleClick}>Warning outline</Button>
+        <Button danger outline onClick={handleClick}>Danger outline</Button>
+        <Button primary outline rounded onClick={handleClick}>Primary outline rounded</Button>
+        <Button secondary outline rounded onClick={handleClick}>Secondary outline rounded</Button>
+        <Button success outline rounded onClick={handleClick}>Success outline rounded</Button>
+        <Button warning outline rounded onClick={handleClick}>Warning outline rounded</Button>
+        <Button danger outline rounded onClick={handleClick}>Danger outline rounded</Button>
       </div>
     </main>
   )

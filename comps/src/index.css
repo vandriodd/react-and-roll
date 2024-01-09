@@ -27,4 +27,6 @@ main {
   align-items: center;
 }
 
-
+button > svg {
+  margin-right: 5px;
+}

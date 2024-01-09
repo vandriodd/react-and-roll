@@ -4,7 +4,9 @@ import className from 'classnames'
 // to solve the problem of the text-white overriding other colors
 import { twMerge } from 'tailwind-merge';
 
-function Button ({ children, primary, secondary, success, danger, warning, outline, rounded }) {
+// '...rest' is a way to pass all the props that are not destructured
+// it takes all the props before the last one destructured
+function Button ({ children, primary, secondary, success, danger, warning, outline, rounded, ...rest }) {
   // Example of usage of the classNames library
   // This condition evaluates that if the primary prop is true, then the bgColor variable will be 'bg-blue-500'
   // let bgColor
@@ -23,7 +25,7 @@ function Button ({ children, primary, secondary, success, danger, warning, outli
   // })
 
   const classes = twMerge(
-    className('px-3 py-1.5 border', {
+    className(rest.className, 'flex items-center px-3 py-1.5 border', {
       'border-blue-500 bg-blue-500 text-white': primary,
       'border-gray-900 bg-gray-900 text-white': secondary,
       'border-green-500 bg-green-500 text-white': success,
@@ -39,8 +41,9 @@ function Button ({ children, primary, secondary, success, danger, warning, outli
     })
   )
 
+  // We pass onClick as a prop to the plain button through the Button component
   return (
-    <button className={classes}>
+    <button {...rest} className={classes}>
       {children}
     </button>
   )
