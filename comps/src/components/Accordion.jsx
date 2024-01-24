@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaAngleDown, FaAngleLeft } from 'react-icons/fa'
 
 function Accordion ({ items }) {
-  const [expandedItem, setExpandedItem] = useState(0)
+  const [expandedIndex, setExpandedIndex] = useState(0)
 
   // * Longhand or Shortand version for event handlers?
   // Longhand -> use if hanles has >1 lines of code
@@ -14,8 +14,28 @@ function Accordion ({ items }) {
   // with the index as an argument
   // ! This is a common pattern in React if we are using map or otherwise building up a list
   // ! and we want to define the event handler outside
+
   const handleClick = (nextIndex) => {
-    setExpandedItem(nextIndex)
+    // * Functional State Update
+    // Use if new value depends on old
+    // We can pass a function to the setter function
+    // This function will receive the current state as an argument
+    // And will return the new state
+    // This snippet will make sure that the state is always up to date
+    setExpandedIndex((current) => {
+      if (current === nextIndex) {
+        return -1
+      }
+      return nextIndex
+    })
+
+    // * Simple State Update
+    // Use if new value doesn't depend on old
+    // if (expandedIndex === nextIndex) {
+    //   setExpandedIndex(-1)
+    // } else {
+    //   setExpandedIndex(nextIndex)
+    // }
   }
 
   // Also we can recieve at first argument an object with the event info
@@ -33,10 +53,10 @@ function Accordion ({ items }) {
   // Returns a new array with the results of the function
   const renderedItems = items.map((item, index) => {
     // This variable will be true if the current item is expanded
-    const isExpanded = index === expandedItem
+    const isExpanded = index === expandedIndex
 
     const icon = (
-      <span>
+      <span className='text-xl'>
         {isExpanded ? <FaAngleDown /> : <FaAngleLeft />}
       </span>
     )
@@ -44,17 +64,17 @@ function Accordion ({ items }) {
     return (
       <article key={item.id}>
         {/* <div onClick={() => setExpandedItem(index)}>{item.label}</div> */}
-        <div onClick={() => handleClick(index)}>
-          {icon}
+        <div className='flex justify-between p-3 bg-gray-50 border-b items-center cursor-pointer' onClick={() => handleClick(index)}>
           {item.label}
+          {icon}
         </div>
-        {isExpanded && <div>{item.content}</div>}
+        {isExpanded && <div className='border-b p-5'>{item.content}</div>}
       </article>
     )
   })
 
   return (
-    <div>{renderedItems}</div>
+    <div className='border-x border-t rounded'>{renderedItems}</div>
   );
 }
 

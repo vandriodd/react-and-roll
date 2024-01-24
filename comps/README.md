@@ -7,4 +7,5 @@ This React project, named 'comps', is focused on building reusable components fo
 
 ## Notes (temporary)
 
-- [ ] || gives back the 1st value that is truthy, && gives back the 1st value that is falsy or the last truthy value
+- [x] || gives back the 1st value that is truthy, && gives back the 1st value that is falsy or the last truthy value
+- [ ] Study more about delayed state update
