@@ -9,3 +9,6 @@ This React project, named 'comps', is focused on building reusable components fo
 
 - [x] || gives back the 1st value that is truthy, && gives back the 1st value that is falsy or the last truthy value
 - [ ] Study more about delayed state update
+- [x] Every component that shows a 'form control' will follow the same pattern:
+  - [x] Call the 'current value' prop 'value'
+  - [x] Call the 'value changed' prop 'onChange'
