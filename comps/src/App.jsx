@@ -1,9 +1,16 @@
 import './index.css'
+import Dropdown from './components/Dropdown'
 
-function App () {
+const App = () => {
+  const options = [
+    { label: 'Red', value: 'red' },
+    { label: 'Green', value: 'green' },
+    { label: 'Blue', value: 'blue' }
+  ]
+
   return (
     <main>
-      <h1>App</h1>
+      <Dropdown options={options} />
     </main>
   )
 }
