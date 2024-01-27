@@ -12,3 +12,16 @@ This React project, named 'comps', is focused on building reusable components fo
 - [x] Every component that shows a 'form control' will follow the same pattern:
   - [x] Call the 'current value' prop 'value'
   - [x] Call the 'value changed' prop 'onChange'
+- [ ] Reusable 'presentation' components:
+  - [ ] Should show a handful of JSX elements
+  - [ ] Accepts + uses the 'children' prop
+  - [ ] Allow extra classNames to be passed in + merge them
+  - [ ] Take extra props, pass them through to root element
+- [x] Event capture & bubbling
+  - [x] 1 - Capture phase: Go to most parent of clicked element, see if it has handler
+  - [x] 2 - Target phase: See if clicked element has handler
+  - [x] 3 - Bubble phase: Go to parent of clicked element, see if it has handler. Then go to parent's parent, etc.
+- [x] useRef hook
+  - [x] Gives access to a DOM element
+  - [x] Can be used to store a mutable value
+  - [x] DOES NOT cause component to re-render

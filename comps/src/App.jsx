@@ -17,7 +17,8 @@ const App = () => {
   ]
 
   return (
-    <main>
+    <main className='flex'>
+      <Dropdown options={options} value={selection} onChange={handleSelect} />
       <Dropdown options={options} value={selection} onChange={handleSelect} />
     </main>
   )
