@@ -1,26 +1,26 @@
 import './index.css'
-import { useState } from 'react'
-import Dropdown from './components/Dropdown'
+import Sidebar from './components/Sidebar'
+import Route from './components/Route'
+import AccordionPage from './pages/AccordionPage'
+import DropdownPage from './pages/DropdownPage'
+import ButtonPage from './pages/ButtonPage'
 
 const App = () => {
-  // option | null
-  const [selection, setSelection] = useState(null)
-
-  const handleSelect = (option) => {
-    setSelection(option)
-  }
-
-  const options = [
-    { label: 'Red', value: 'red' },
-    { label: 'Green', value: 'green' },
-    { label: 'Blue', value: 'blue' }
-  ]
-
   return (
-    <main className='flex'>
-      <Dropdown options={options} value={selection} onChange={handleSelect} />
-      <Dropdown options={options} value={selection} onChange={handleSelect} />
-    </main>
+    <div className='container mx-auto grid grid-cols-6 gap-4 mt-4'>
+      <Sidebar />
+      <div className='col-span-5'>
+        <Route path='/accordion'>
+          <AccordionPage />
+        </Route>
+        <Route path='/dropdown'>
+          <DropdownPage />
+        </Route>
+        <Route path='/button'>
+          <ButtonPage />
+        </Route>
+      </div>
+    </div>
   )
 }
 
