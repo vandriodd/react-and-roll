@@ -19,7 +19,7 @@ const NavigationProvider = ({ children }) => {
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
     };
-  })
+  }, [])
 
   // This function will be used to navigate to a new page
   const navigate = (to) => {

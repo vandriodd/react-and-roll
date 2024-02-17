@@ -4,6 +4,9 @@ import Route from './components/Route'
 import AccordionPage from './pages/AccordionPage'
 import DropdownPage from './pages/DropdownPage'
 import ButtonPage from './pages/ButtonPage'
+// import ModalPage from './pages/ModalPage'
+// import TablePage from './pages/TablePage'
+import CounterPage from './pages/CounterPage'
 
 const App = () => {
   return (
@@ -18,6 +21,15 @@ const App = () => {
         </Route>
         <Route path='/button'>
           <ButtonPage />
+        </Route>
+        {/* <Route path='/modal'>
+          <ModalPage />
+        </Route> */}
+        {/* <Route path='/table'>
+          <TablePage />
+        </Route> */}
+        <Route path='/counter'>
+          <CounterPage initialCount={10} />
         </Route>
       </div>
     </div>
