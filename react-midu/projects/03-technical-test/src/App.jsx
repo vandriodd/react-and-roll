@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
-
-const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
+import { getRandomFact } from './services/facts'
+import { useCatImage } from './hooks/useCatImage'
+import { useCatFact } from './hooks/useCatFact'
 
 export const App = () => {
-  const [fact, setFact] = useState()
-  const [imageUrl, setImageUrl] = useState()
-  const [factError, setFactError] = useState()
+  const { fact, refreshFact } = useCatFact()
+  const { imageUrl } = useCatImage({ fact })
 
   // ^ For doing a fetch, we need to use useEffect, to tell React to do something after the component is mounted, not everytime it's rendered
   //* TIP: when we write useEffect, put the dependencies FIRST inside the parenthesis, to avoid forgetting them
@@ -22,30 +22,17 @@ export const App = () => {
   // }, [])
 
   useEffect(() => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then(res => {
-        if (!res.ok) {
-          setFactError('Failed to fetch')
-          throw new Error(factError)
-        }
-        return res.json()
-      })
-      .then(data => {
-        const { fact } = data
-        setFact(fact)
-      })
+    getRandomFact()
   }, [])
 
-  useEffect(() => {
-    if (!fact) return
-
-    const firstWords = fact.split(' ', 3).join(' ')
-    setImageUrl(`https://cataas.com/cat/says/${firstWords}`)
-  }, [fact])
+  const handleClick = async () => {
+    refreshFact()
+  }
 
   return (
     <main>
       <h1>App of cats</h1>
+      <button onClick={handleClick}>Get new fact</button>
       {fact && <p>{fact}</p>}
       {imageUrl && <img src={imageUrl} alt={`Image result of fact ${fact}`} />}
     </main>
