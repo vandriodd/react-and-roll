@@ -4,6 +4,7 @@
 
 - [Random facts](https://catfact.ninja/fact)
 - [Random Image](https://cataas.com/cat/says/hello)
+  - Endpoint `https://cataas.com/cat/says/${text}?size=50&color=red&json=true`
 
 ## Instructions
 
