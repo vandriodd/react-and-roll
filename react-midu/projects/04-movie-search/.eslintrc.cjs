@@ -20,6 +20,6 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-single'],
     'quotes': ['error', 'single'],
     'semi': ['error', 'never'],
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
   },
 }

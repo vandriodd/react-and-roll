@@ -1,6 +1,6 @@
 const API_KEY = '30fb4aa2'
 
-export const searchMovies = async (search) => {
+export const searchMovies = async ({ search }) => {
   if (search === '') return null
 
   try {
@@ -14,7 +14,7 @@ export const searchMovies = async (search) => {
     // e.g. movie.imdbID inside the renderings
     // The best way to avoid this is mapping the data to a new object, and avoids use the contract API on a deep component
     //^ Control the contract only once
-    const movies = json
+    const movies = json.Search
 
     return movies?.map((movie) => ({
       id: movie.imdbID,

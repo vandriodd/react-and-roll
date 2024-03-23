@@ -1,8 +1,9 @@
 import './App.css'
+import debounce from 'just-debounce-it'
 import { useMovies } from './hooks/useMovies'
 //* useRef -> hook that allows to create a mutable reference that persists for the entire lifecycle of the component. And everytime it changes, it doesn't trigger a re-render
 import { Movies } from './components/Movies'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 // Practices to render
 
@@ -95,29 +96,40 @@ const useSearch = () => {
 }
 
 function App() {
+  const [sort, setSort] = useState(false)
   const { search, setSearch, error } = useSearch()
-  const { movies, getMovies, loading } = useMovies({ search })
-  const inputRef = useRef()
+  const { movies, getMovies, loading } = useMovies({ search, sort })
+
+  // eslint-disable-next-line
+  const debouncedGetMovies = useCallback(
+    debounce((search) => {
+      getMovies({ search })
+    }, 300),
+    [getMovies]
+  )
+
+  const handleSort = () => {
+    setSort(!sort)
+  }
+
+  const handleChange = (e) => {
+    const newSearch = e.target.value
+    setSearch(newSearch)
+    debouncedGetMovies(newSearch)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     //^ Here creates an object, from the current we can change the value that comes after
-    // while inputRef.current is the input element, .value is the value of the input (vanilla JS)
-    const value = inputRef.current.value
-    console.log(value)
-    getMovies()
+    getMovies({ search })
 
     // Without useRef hook its like
     // const fields = new window.FormData(e.target)
-    // const query = fields.get('query')
+    // const query = fieldss.get('query')
     // console.log(query)
 
     // retrieve many inputs elements
     // const fields = Object.fromEntries(new window FormData(e.target))
-  }
-
-  const handleChange = () => {
-    setSearch(inputRef.current.value)
   }
 
   return (
@@ -133,9 +145,9 @@ function App() {
             onChange={handleChange}
             value={search}
             name='query'
-            ref={inputRef}
             placeholder='Avengers, Star Wars, The Matrix...'
           />
+          <input type='checkbox' onChange={handleSort} checked={sort} />
           <button type='submit'>Search</button>
         </form>
         {error && <p style={{ color: 'red' }}>{error}</p>}
