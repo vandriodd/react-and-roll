@@ -1,19 +1,23 @@
-import responseMovies from '../mocks/with-results.json'
+import { useState } from 'react'
+import { searchMovies } from '../services/movies'
 
-export const useMovies = () => {
-  //! Avoid depending on the contract of the API
-  // e.g. movie.imdbID inside the renderings
-  // The best way to avoid this is mapping the data to a new object, and avoids use the contract API on a deep component
-  //^ Control the contract only once
+export const useMovies = ({ search }) => {
+  const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const movies = responseMovies.Search
+  const getMovies =  async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      const newMovies = await searchMovies(search)
+      setMovies(newMovies)
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
-  const mappedMovies = movies?.map(movie => ({
-    id: movie.imdbID,
-    title: movie.Title,
-    year: movie.Year,
-    poster: movie.Poster
-  }))
-
-  return { movies: mappedMovies }
+  return { movies, getMovies, loading }
 }
