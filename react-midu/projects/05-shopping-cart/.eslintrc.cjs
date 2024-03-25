@@ -19,6 +19,7 @@ module.exports = {
     ],
     'jsx-quotes': ['error', 'prefer-single'],
     'quotes': ['error', 'single'],
-    'semi': ['error', 'never']
+    'semi': ['error', 'never'],
+    'react/prop-types': 'off'
   },
 }
