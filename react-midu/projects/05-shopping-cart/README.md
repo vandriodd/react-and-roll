@@ -29,6 +29,7 @@
   **2. Provide the Context.** Wrap components where you want the context available with a Provider component. The Provider accepts a prop called value containing the context's value.
 
   **3. Consume the Context.** Access the context's value within components using the useContext hook. This hook takes the context created in step one as an argument and returns its current value.
+- **useReducer:** allows us to manage state in a scalable way. It operates by receiving a function that takes the current state and the action to perform. From these two parameters, useReducer returns the new state. This abstraction of state management is entirely separate from the component, state provider, and custom hooks, facilitating state management in larger and more complex applications.
 
 > [!IMPORTANT]
 >
