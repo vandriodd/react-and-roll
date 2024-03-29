@@ -1,32 +1,23 @@
-import { useState } from "react"
+import HomePage from './pages/Home'
+import AboutPage from './pages/About'
+import Router from './Router'
+import Page404 from './pages/404'
 
-const HomePage = () => {
-  return (
-    <>
-      <h1>Home</h1>
-      <p>Welcome to the Home page</p>
-      <a href='/about'>About Us</a>
-    </>
-  )
-}
-
-const AboutPage = () => {
-  return (
-    <>
-      <h1>About</h1>
-      <p>Welcome to the About page</p>
-      <a href='/'>Home</a>
-    </>
-  )
-}
+const appRoutes = [
+  {
+    path: '/',
+    component: HomePage,
+  },
+  {
+    path: '/about',
+    component: AboutPage,
+  }
+]
 
 const App = () => {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
-
   return (
     <main>
-      {currentPath === '/' && <HomePage />}
-      {currentPath === '/about' && <AboutPage />}
+      <Router routes={appRoutes} defaultComponent={Page404} />
     </main>
   )
 }

@@ -26,3 +26,7 @@ This project is a basic implementation of a router for React applications, desig
 ---
 
 ### Notes
+
+- **Single-page application (SPA):** is a web application that interacts with the user by dynamically rewriting the current page rather than loading entire new pages from a server.
+- **Multiple-page application (MPA):** is a web application that consists of multiple pages, each with its own unique URL.
+- Use button to navigate between routes involves accesibility issues. Is not detected by screen readers and keyboard navigation *(e.g. open in a new tab)*.
