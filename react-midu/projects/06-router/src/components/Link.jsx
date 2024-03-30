@@ -1,4 +1,4 @@
-import { EVENTS, BUTTONS } from './consts'
+import { EVENTS, BUTTONS } from '../consts'
 
 export const navigate = (href) => {
   //^ Change URL

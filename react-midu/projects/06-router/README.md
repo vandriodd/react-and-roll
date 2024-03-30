@@ -30,3 +30,6 @@ This project is a basic implementation of a router for React applications, desig
 - **Single-page application (SPA):** is a web application that interacts with the user by dynamically rewriting the current page rather than loading entire new pages from a server.
 - **Multiple-page application (MPA):** is a web application that consists of multiple pages, each with its own unique URL.
 - Use button to navigate between routes involves accesibility issues. Is not detected by screen readers and keyboard navigation *(e.g. open in a new tab)*.
+- **Dynamic route:** is a route that can accept parameters, allowing the application to display different content based on the URL. e.g. /search/:query
+- **Optional chaining:** is a JavaScript feature that allows you to safely access nested properties of an object without having to check if each level is defined.
+- **Lazy loading:** is a technique that defers loading non-essential resources at the time of the initial page load. This can help improve performance by reducing the amount of data that needs to be loaded upfront.
