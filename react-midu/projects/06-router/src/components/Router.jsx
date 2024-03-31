@@ -1,4 +1,5 @@
-import { EVENTS } from '../consts'
+import { EVENTS } from '../utils/consts'
+import { getCurrentPath } from '../utils/getCurrentPath'
 import { useEffect, useState, Children } from 'react'
 import { match } from 'path-to-regexp'
 
@@ -7,13 +8,13 @@ const Router = ({
   defaultComponent: DefaultComponent = () => null,
   children
 }) => {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+  const [currentPath, setCurrentPath] = useState(getCurrentPath())
 
   useEffect(() => {
     //! BAD
     //! we need store the function in a variable (had the same reference), so we can remove specific event listener
     // window.addEventListener(NAVIGATION_EVENT, () => {
-    //   setCurrentPath(window.location.pathname)
+    //   setCurrentPath(getCurrentPath())
     // })
 
     // return () => {
@@ -22,7 +23,7 @@ const Router = ({
 
     //* GOOD
     const onNavigate = () => {
-      setCurrentPath(window.location.pathname)
+      setCurrentPath(getCurrentPath())
     }
 
     //^ Forward navigation

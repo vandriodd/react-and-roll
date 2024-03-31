@@ -33,3 +33,9 @@ This project is a basic implementation of a router for React applications, desig
 - **Dynamic route:** is a route that can accept parameters, allowing the application to display different content based on the URL. e.g. /search/:query
 - **Optional chaining:** is a JavaScript feature that allows you to safely access nested properties of an object without having to check if each level is defined.
 - **Lazy loading:** is a technique that defers loading non-essential resources at the time of the initial page load. This can help improve performance by reducing the amount of data that needs to be loaded upfront.
+
+---
+
+### Libraries
+
+- **Happy DOM:** is a lightweight library that provides a simple API for creating and manipulating DOM elements.
