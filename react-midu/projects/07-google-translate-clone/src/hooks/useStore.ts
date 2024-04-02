@@ -18,8 +18,13 @@ const reducer = (state: State, action: Action) => {
   switch (type) {
     case "INTERCHANGE_LANGUAGES":
       if (state.fromLang === AUTO_LANGUAGE) return state;
+
+      const loadingInter = state.fromText !== "";
+
       return {
         ...state,
+        loadingInter,
+        result: "",
         fromLang: state.toLang,
         toLang: state.fromLang,
       };
