@@ -24,19 +24,33 @@ const reducer = (state: State, action: Action) => {
         toLang: state.fromLang,
       };
     case "SET_FROM_LANG":
+      //^ Avoid refreshing the translation if the language hasn't changed
+      if (state.fromLang === action.payload) return state;
+      //^ Set loading to true if there is text to translate
+      const loadingFrom = state.fromText !== "";
+
       return {
         ...state,
         fromLang: action.payload,
+        result: "",
+        loadingFrom,
       };
     case "SET_TO_LANG":
+      if (state.fromLang === action.payload) return state;
+      const loadingTo = state.fromText !== "";
+
       return {
         ...state,
         toLang: action.payload,
+        result: "",
+        loadingTo,
       };
     case "SET_FROM_TEXT":
+      const loading = action.payload !== "";
+
       return {
         ...state,
-        loading: true,
+        loading,
         fromText: action.payload,
       };
     case "SET_RESULT":

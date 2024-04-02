@@ -4,15 +4,16 @@ import React from 'react';
 
 interface Props {
   type: SectionType;
-  loading?: undefined;
+  loading?: boolean;
   onChange: (value: string) => void;
   value: string;
+  autoFocus?: boolean;
 }
 
-const commonStyles = {
+const commonStyles: React.CSSProperties = {
   border: 0,
   height: "200px",
-  resize: 'none'
+  resize: "none"
 };
 
 const getPlaceholder = ({ type, loading }: {type: SectionType, loading?: boolean}) => {
