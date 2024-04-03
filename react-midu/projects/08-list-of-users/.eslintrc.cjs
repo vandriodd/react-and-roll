@@ -25,8 +25,9 @@ module.exports = {
     "jsx-quotes": ["error", "prefer-single"],
     quotes: ["error", "single"],
     semi: ["error", "never"],
-    'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-unsafe-argument': 'off'
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/method-signature-style": "off"
   },
 };

@@ -8,23 +8,9 @@ const API_URL = 'https://randomuser.me/api/?results=20'
 const App = () => {
   const [users, setUsers] = useState<User[]>([])
   const [showColors, setShowColors] = useState(false)
+  const [sortByCountry, setSortByCountry] = useState(false)
 
-  // // 2. Hacer un fetching de datos
   useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     // Primero preciso almacenar la respuesta del fetch
-  //     const response = await fetch(API_URL)
-
-    //     // Después extraigo la info
-    //     const data = await response.json()
-
-    //     // Ahora preciso agarrar esa info y meterla en un estado:)
-    //     // El estado se actualiza asincrónicamente
-    //     setUsers(data.results)
-    //     console.log(data.results);
-
-    //   }
-    //   fetchUsers()
     fetch(API_URL)
       .then(async response => await response.json())
       .then(data => { setUsers(data.results) })
@@ -35,6 +21,35 @@ const App = () => {
     setShowColors(!showColors)
   }
 
+  const toggleSortByCountry = () => {
+    setSortByCountry(prevState => !prevState)
+  }
+
+  //! THIS ISN'T CORRECT
+  // ^ sort mutates the original array!
+  // ^ so, in case we need the original array (don't want to order it), we should create a copy of it
+  // const sortedUsers = sortByCountry
+  //   ? users.sort((a, b) => {
+  //   return a.location.country.localeCompare(b.location.country)
+  // }) : users
+
+  //* ANOTHER WAY
+  //* still not the best option
+  // const sortedUsers = sortByCountry
+  //   ? [...users].sort((a, b) => {
+  //     return a.location.country.localeCompare(b.location.country)
+  //   })
+  //   : users
+  // }
+
+  //* THE BEST WAY
+  // ^ toSorted() -> returns a NEW array with the elements sorted
+  const sortedUsers = sortByCountry
+    ? users.toSorted((a, b) => {
+      return a.location.country.localeCompare(b.location.country)
+    })
+    : users
+
   return (
     <>
       <header>
@@ -43,11 +58,14 @@ const App = () => {
           <button onClick={toggleColor}>
             Colored Rows
           </button>
+          <button onClick={toggleSortByCountry}>
+            {sortByCountry ? 'Don\'t sort by Country' : 'Sort by Country' }
+          </button>
         </div>
       </header>
       <main>
         {/* {JSON.stringify(users, null, 2)} */}
-        <UsersList showColors={showColors} users={users} />
+        <UsersList showColors={showColors} users={sortedUsers} />
       </main>
     </>
   )

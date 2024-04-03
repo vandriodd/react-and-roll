@@ -16,3 +16,4 @@
 ### Notes
 
 - Use [quicktype](https://quicktype.io/) for type generation.
+- Avoid use more than 1 state to manage the same data.
