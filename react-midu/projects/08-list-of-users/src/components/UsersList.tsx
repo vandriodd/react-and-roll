@@ -11,9 +11,10 @@ import { type User } from '../../types.d'
 interface UsersListProps {
   users: User[]
   showColors: boolean
+  onDelete: (uuid: string) => void
 }
 
-const UsersList = ({ users, showColors }: UsersListProps) => {
+const UsersList = ({ users, showColors, onDelete }: UsersListProps) => {
   return (
     <table width='100%'>
       <thead>
@@ -25,13 +26,10 @@ const UsersList = ({ users, showColors }: UsersListProps) => {
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
-        {users.map((user, index) => {
-          const bgColor = index % 2 === 0 ? '#333' : '#555'
-          const color = showColors ? bgColor : 'transparent'
-
+      <tbody className={showColors ? 'table--showColors' : 'table'}>
+        {users.map((user) => {
           return (
-            <tr key={index} style={{ backgroundColor: color }}>
+            <tr key={user.login.uuid}>
               <td>
                 <img
                   src={user.picture.thumbnail}
@@ -42,7 +40,7 @@ const UsersList = ({ users, showColors }: UsersListProps) => {
               <td>{user.name.last}</td>
               <td>{user.location.country}</td>
               <td>
-                <button>Delete</button>
+                <button onClick={() => { onDelete(user.login.uuid) }}>Delete</button>
               </td>
             </tr>
           )
