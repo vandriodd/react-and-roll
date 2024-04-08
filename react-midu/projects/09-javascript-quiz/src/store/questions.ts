@@ -3,7 +3,7 @@ import { type Question } from '../types.d'
 
 interface State {
   questions: Question[];
-  currentQuestions: number;
+  currentQuestion: number;
   fetchQuestions: (limit: number) => Promise<void>;
 }
 
@@ -16,17 +16,12 @@ export const useQuestionStore = create<State>((set, get) => {
     currentQuestion: 0,
 
     fetchQuestions: async (limit: number) => {
-      set({
-        questions: [
-          {
-            id: 1,
-            question: '¿Cuál es la salida de este código?',
-            code: 'console.log(typeof NaN)',
-            answers: ['undefined', 'NaN', 'string', 'number'],
-            correctAnswer: 3,
-          },
-        ],
-      })
+      const res = await fetch('http://localhost:5173/data.json')
+      const json = await res.json()
+
+      // Shuffle the questions and get the first n questions
+      const questions = json.sort(() => Math.random() - 0.5).slice(0, limit)
+      set({ questions})
     },
   }
 })
