@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 import confetti from 'canvas-confetti'
+// Middleware -> is a function that wraps the store and allows you to modify the behavior of the store
+import { persist } from 'zustand/middleware'
 import { type Question } from '../types.d'
 
 interface State {
@@ -14,7 +16,7 @@ interface State {
 // create must be receive a callback that returns an object that is the global state, the store, which contains the state and the actions that can change the state
 //^ This function initializes the store with the initial state and the actions that can change and read the state.
 //* set & get are methods that we can use to change and read the state
-export const useQuestionStore = create<State>((set, get) => {
+export const useQuestionStore = create<State>()(persist((set, get) => {
   return {
     questions: [],
     currentQuestion: 0,
@@ -63,5 +65,12 @@ export const useQuestionStore = create<State>((set, get) => {
         set({ currentQuestion: previousQuestion })
       }
     },
+    reset: () => {
+      set({ currentQuestion: 0, questions: [] })
+    }
   }
-})
+}, {
+  name: 'questions'
+}))
+
+// We need to specify an prefix to avoid conflicts with other stores
