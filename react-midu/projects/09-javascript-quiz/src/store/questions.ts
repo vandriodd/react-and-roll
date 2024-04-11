@@ -7,6 +7,8 @@ interface State {
   currentQuestion: number;
   fetchQuestions: (limit: number) => Promise<void>;
   selectAnswer: (questionId: number, answerIndex: number) => void;
+  goToNextQuestion: () => void;
+  goToPreviousQuestion: () => void;
 }
 
 // create must be receive a callback that returns an object that is the global state, the store, which contains the state and the actions that can change the state
@@ -46,6 +48,20 @@ export const useQuestionStore = create<State>((set, get) => {
       }
       // update state
       set({ questions: newQuestions })
+    },
+    goToNextQuestion: () => {
+      const { currentQuestion, questions } = get()
+      const nextQuestion = currentQuestion + 1
+      if (nextQuestion < questions.length) {
+        set({ currentQuestion: nextQuestion })
+      }
+    },
+    goToPreviousQuestion() {
+      const { currentQuestion } = get()
+      const previousQuestion = currentQuestion - 1
+      if (previousQuestion >= 0) {
+        set({ currentQuestion: previousQuestion })
+      }
     },
   }
 })
