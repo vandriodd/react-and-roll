@@ -1,0 +1,82 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+
+  <style>
+    .box {
+      border: 1px solid #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .box--large {
+      width: 270px;
+      height: 270px;
+    }
+
+    .box--medium {
+      width: 180px;
+      height: 180px;
+    }
+
+    .box--small {
+      width: 90px;
+      height: 90px;
+    }
+  </style>
+  <script type="text/babel">
+    // function Box(props) {
+    //   Doesn't apply "box" class
+    //   return <div className="box" {...props} />;
+
+    //   Doesn't apply the props
+    //   return <div {...props} className="box" />;
+
+    //   The reason of both of these is because the spread of props we're getting an override of the className prop that's being provided to the box component.
+    //   What we can do is combine the classNames into a single className that will work for all of our boxes.
+
+    // }
+
+    // So, for this, we should destructure the className prop from the props object
+    // and then we can use the rest operator to get the rest of the props.
+
+    function Box({ className = "", style, size, ...rest }) {
+      const sizeClassName = size ? `box--${size}` : "";
+
+      // The problem with that is that if we don't provide the classname, we get a class of box undefined.
+      // Box({className, ...rest})
+
+      // But we can fix it by putting a default value for the className prop.
+      return (
+        <div
+          className={`box ${className} ${sizeClassName}`}
+          style={{ fontStyle: "italic", ...style }}
+          {...rest}
+        />
+      );
+    }
+
+    const element = (
+      <div>
+        <Box size="small" style={{ backgroundColor: "lightblue" }}>
+          small lightblue box
+        </Box>
+        <Box size="medium" style={{ backgroundColor: "pink" }}>
+          mediumlightblue box
+        </Box>
+        <Box size="large" style={{ backgroundColor: "orange" }}>
+          large lightblue box
+        </Box>
+      </div>
+    );
+
+    // className is actually the DOM property that you use to access the class attribute on DOM nodes.
+    // class is a reserved keyword in JavaScript, so we can't use it as a property name.
+
+    ReactDOM.render(element, document.getElementById("root"));
+  </script>
+</body>
