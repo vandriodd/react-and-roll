@@ -1,0 +1,25 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootEelement = document.getElementById("root");
+
+    // To avoid refresh the whole page, we can use a function to update a specific part of the page
+    function tick() {
+      const time = new Date().toLocaleTimeString();
+      const element = <div>{time}</div>;
+
+      ReactDOM.render(element, rootEelement);
+    }
+
+    // Here, React will re-render the component every second
+    // It's keeping focus for us on the specific part of the page
+    // Anyway, it's not the best way to do it
+
+    // When you create the element to render, React is going to compare the elements that you returned before with the new element
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>

@@ -1,0 +1,49 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootEelement = document.getElementById("root");
+
+    // const message = (props) => <div className="message">{props.msg}</div>;
+
+    // const element = (
+    //   <div className="container">
+    //     {message({ msg: "Hello World!" })}
+    //     {message({ msg: "Goodbye World!" })}
+    //   </div>
+    // );
+
+    // We need that components to be capitalized, because when the compiler sees a capitalized letter, it will render it as the correct type, otherwise it will render like an string or something unexpected for us in the createElement method.
+
+    const Message = (props) => <div className="message">{props.msg}</div>;
+
+    // const element = (
+    //   <div className="container">
+    //     {Message({msg="Hello World!"})}
+    //     {Message({msg="Goodbye World!"})}
+    //   </div>
+    // );
+
+    // When you give a capital letter in JSX that's the same as calling React.createElement() with the function that you're referencing.
+
+    // const element = (
+    //   <div className="container">
+    //     <Message msg="Hello World!" />
+    //     <Message msg="Goodbye World!" />
+    //   </div>
+    // );
+
+    // Or (preferable)
+
+    const element = (
+      <div className="container">
+        <Message>Hello World!</Message>
+        <Message>Goodbye World!</Message>
+      </div>
+    );
+
+    ReactDOM.render(element, rootEelement);
+  </script>
+</body>

@@ -1,0 +1,55 @@
+<!-- When you start creating custom function components, you're going to have people using those function components and they may not use it quite right  -->
+
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.6.1/prop/types.js"></script>
+  <script type="text/babel">
+    const rootEelement = document.getElementById("root");
+
+    // When you start creating custom function components, you're going to have people using those function components
+    // and they may not use it quite right.
+
+    function SayHello({ firstName, lastName }) {
+      return (
+        <div>
+          <h1>
+            Hello {firstName} {lastName}!
+          </h1>
+        </div>
+      );
+
+      // for example, if you forget to pass the props, it will render undefined (React doesn't render undefined, it just ignores it, so it will render nothing, like an empty string)
+      // For this, we can use the prop-types library to validate (in runtime) the props that are being passed to our components.
+
+      // const PropTypes = {
+      //   string(props, propName, componentName) {
+      //     if (typeof props[propName] !== "string") {
+      //       return new Error(
+      //         `Hey, the component ${componentName} need the prop ${propName} to be a string, but you passed a ${typeof props[
+      //           propName
+      //         ]}`
+      //       );
+      //     }
+      //   },
+      // };
+
+      // Important! PropTypes by default are not required, to do so, you should add isRequired
+
+      SayHello.propTypes = {
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+      };
+    }
+
+    // In production, propTypes are not applied (so probably you don't see anymore the errors in console).
+    // For a clean code, you can actually get a compiler plugin that will remove the prop-types from your src code for production.
+    // e.g. babel-plugin-transform-react-remove-prop-types
+
+    const element = <SayHello firstName="John" />;
+
+    ReactDOM.render(element, rootEelement);
+  </script>
+</body>

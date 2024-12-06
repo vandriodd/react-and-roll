@@ -1,0 +1,48 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.6.1/prop/types.js"></script>
+  <script type="text/babel">
+    const rootEelement = document.getElementById("root");
+    // Interpolation -> is the process of inserting strings or values into an existing string for various purposes.
+
+    // The text "Hello World" has 11 characters
+    // The text "" has no characters
+    function CharacterCount({ text }) {
+      // here we are in js land
+      // we can do js functions, if statements, all of that stuff
+
+      // we enter JSX land by doing open-angle bracket with the tag
+      // here, we have prop syntax, children syntax, and interpolation syntax
+      return (
+        <div>
+          {
+            /* once we do an opening curly brace, we are now in js land. But limitated, because we can only do expressions */ `The text "${text}" has `
+          }
+          {text.length ? <strong>{text.length}</strong> : "no"}
+          {" characters"}
+        </div>
+      );
+
+      // To do it more graphic
+
+      // If we wanted to instead of passing this string
+      // React.createElement("div", null, "The text...");
+      // do some sort of if statement, that wouldn't work at all. It doesn't make any sense to pass a statement
+      // as an argument function
+      // And for the same reason, you can't use statements inside of the curly braces of JSX because the curly braces
+      // basically put all of the code inside of them into a function
+    }
+
+    const element = (
+      <>
+        <CharacterCount text="Hello World" />
+        <CharacterCount text="" />
+      </>
+    );
+
+    ReactDOM.render(element, rootEelement);
+  </script>
+</body>

@@ -1,0 +1,16 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootEelement = document.getElementById("root");
+
+    // JSX is not a valid JavaScript syntax, so we need to compile it to something that the browser can understand.
+    // Babel is a popular tool for this purpose.
+    // JSX turns into javascript object.
+    const element = <div className="container">Hello World</div>;
+
+    ReactDOM.render(element, rootEelement);
+  </script>
+</body>

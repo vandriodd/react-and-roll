@@ -1,0 +1,23 @@
+<body>
+  <div id="root"></div>
+  <!-- React for create elements, ReactDOM for rendering those -->
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script type="text/javascript">
+    const rootEelement = document.getElementById("root");
+
+    // React.createElement(type of element, props, children)
+    const element = React.createElement(
+      "div",
+      {
+        children: "Hello world!",
+        className: "container",
+      },
+      "Or we can write the content here",
+      "Or here"
+    );
+
+    // ReactDOM.render(element, container)
+    ReactDOM.render(element, rootEelement);
+  </script>
+</body>

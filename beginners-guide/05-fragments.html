@@ -1,0 +1,42 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootEelement = document.getElementById("root");
+
+    // Doing without JSX
+    // const helloElement = React.createElement("span", null, "Hello");
+    // const worldElement = React.createElement("span", null, " World");
+
+    // // If we want render multiple elements, we can use React.Fragment
+    // const element = React.createElement(
+    //   React.Fragment,
+    //   null,
+    //   helloElement,
+    //   worldElement
+    // );
+
+    // Doing with JSX
+    // const element = (
+    //   <React.Fragment>
+    //     <span>Hello</span>
+    //     <span>World</span>
+    //   <React.Fragment/>
+    // );
+
+    // or
+
+    const element = (
+      <>
+        <span>Hello</span>
+        <span>World</span>
+      </>
+    );
+
+    // React.Fragment allows us to return multiple elements without adding extra nodes to the DOM.
+
+    ReactDOM.render(element, rootEelement);
+  </script>
+</body>
