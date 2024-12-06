@@ -1,0 +1,49 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootElement = document.getElementById("root");
+
+    const state = { eventCount: 0, username: "" };
+
+    function App() {
+      function handleClick() {
+        setState({ eventCount: state.eventCount + 1 });
+      }
+
+      function handleChange(event) {
+        console.log(event); // We get a SyntheticEvent object
+        // That's not the native event object, but a wrapper around it. React does some serious performance optimizations for our events
+        // And that's wht this synthetic event thig is all about.
+        // Most of the time you don't need access to the native event, but if you do, you can access it via event.nativeEvent
+        setState({ username: event.target.value });
+      }
+
+      return (
+        <div>
+          <p>There have been {state.eventCount} events.</p>
+          <p>
+            <button onClick={handleClick}>Click me</button>
+          </p>
+          <p>You typed: {state.username}</p>
+          <p>
+            <input onChange={handleChange} />
+          </p>
+        </div>
+      );
+    }
+
+    function setState(newState) {
+      Object.assign(state, newState);
+      renderApp();
+    }
+
+    function renderApp() {
+      ReactDOM.render(<App />, rootElement);
+    }
+
+    renderApp();
+  </script>
+</body>
