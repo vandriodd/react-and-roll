@@ -28,6 +28,8 @@ const Component = ({ title }) => {
 <Component title="Hello World" />;
 ```
 
+They are the base of the component, because they allow you to pass data to the component and make it dynamic/reusable.
+
 ### Styles in React
 
 There are several ways to add styles to a React component, because React doesn't have a built-in way to add styles. Some of the most common ways are:
@@ -72,3 +74,27 @@ const Component = () => {
 };
 <Component />;
 ```
+
+### React Fragment
+
+A React Fragment is a way to group a list of children without adding extra nodes to the DOM. It is useful when you want to return multiple elements from a component without wrapping them in a div. For example:
+
+```jsx
+const Component = () => {
+  return (
+    <>
+      <h1>Hello World</h1>
+      <p>This is a paragraph</p>
+    </>
+  );
+};
+<Component />;
+```
+
+## Tips
+
+### Style by separations, not by components
+
+The styles applied in the components affect the components wherever you put them. Imagine that there is a moment when you want to use the component alone, for example in the case of this project, where a card appears alone; if the styles are in the component, it will not look good because the styles of the card will not be applied. That is why it is better to separate the styles and apply them where the card is going to be rendered.
+
+That is, for example, a div that contains multiple cards, here we would apply styles related to separations.
