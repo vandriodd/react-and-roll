@@ -30,6 +30,22 @@ const Component = ({ title }) => {
 
 They are the base of the component, because they allow you to pass data to the component and make it dynamic/reusable.
 
+#### Booleans as props
+
+The value is passed between braces, if it is a truetly value it can be passed without specifying "true", but if it is a falsey value it must be specified "false".
+
+Also, if we do not pass the prop directly and try to access it, the value we will have available is undefined _(a falsey value, it can be useful for validations)_.
+
+#### Functions as props
+
+They are super important in React, because we will always want to pass functions or callbacks down, that is, we will want the components that we render further down (the children) to be able to update a state, handle or display certain data, etc.
+
+If we want to use the function in another component, we have to pass the function as a parameter, not the function call (which passes the value result).
+
+#### Elements as props
+
+We pass the elements by props to the component that interests us, and there we evaluate and
+
 ### Styles in React
 
 There are several ways to add styles to a React component, because React doesn't have a built-in way to add styles. Some of the most common ways are:
@@ -90,6 +106,20 @@ const Component = () => {
 };
 <Component />;
 ```
+
+### Difference between elements and components
+
+A component is a function that returns an element, it's like a factory of elements.
+An element is what React renders. It is what you see in the browser.
+
+### Props are immutable
+
+The props should be immutable. If we want to modify a prop, we should:
+
+- Modify it in the parent component and pass it again to the child component.
+- Create a new constant within the child component, and use the prop there.
+
+If we modify the value of the prop within the child component, we are depriving React of having the security of what it renders.
 
 ## Tips
 
