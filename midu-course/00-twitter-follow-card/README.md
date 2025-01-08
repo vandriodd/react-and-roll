@@ -44,7 +44,30 @@ If we want to use the function in another component, we have to pass the functio
 
 #### Elements as props
 
-We pass the elements by props to the component that interests us, and there we evaluate and
+We pass the elements by props to the component that interests us, and there we evaluate and render them.
+
+#### Objects as props
+
+Usually is not a good option, but sometimes is necessary. We can have an object that contains several properties and pass it as a single parameter. The way to pass it is the same as with the other types of data.
+
+```jsx
+const object = {
+  title: "Hello World",
+  description: "This is a description",
+};
+
+<Component {...object} />;
+```
+
+The rest operator is responsible for destructuring the object and passing each property as an independent parameter.
+
+It can be considered bad practice for the following reasons:
+
+- You may be sending unnecessary information.
+- It may cause the component to re-render unnecessarily.
+- It can make the code more difficult to read.
+
+It is better to be more declarative.
 
 ### Styles in React
 
@@ -120,6 +143,43 @@ The props should be immutable. If we want to modify a prop, we should:
 - Create a new constant within the child component, and use the prop there.
 
 If we modify the value of the prop within the child component, we are depriving React of having the security of what it renders.
+
+### Children
+
+What is wrapped by an element, that is, what is between tags, is a children.
+
+At the component level, the children can be other components, a simple string, etc. We always have 1 children, that contains all the elements inside.
+
+If we want to recover a children, we must use the special prop children. For example:
+
+```jsx
+const Component = ({ children }) => {
+  return <div>{children}</div>;
+};
+
+<Component>Hello World</Component>;
+```
+
+### State
+
+State is a way to store data in a component. It is mutable, that is, it can be modified. It is used to store data that changes over time, for example, the value of an input, the visibility of a modal, etc.
+
+To use state in a component, we have to use the `useState` hook. For example:
+
+```jsx
+const Component = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </>
+  );
+};
+```
+
+States are the key to making components interactive and dynamic.
 
 ## Tips
 
