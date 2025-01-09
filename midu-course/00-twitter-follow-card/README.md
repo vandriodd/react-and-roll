@@ -221,6 +221,26 @@ const Component = () => {
 };
 ```
 
+### Render lists
+
+Usuallly we get an array of data from an API, and we want to render a list of elements. To do this, we can use the `map` method, that allows us to iterate over the array and return a new array with the elements we want to render. For example:
+
+```jsx
+const Component = () => {
+  const data = ["Hello", "World"];
+
+  return (
+    <ul>
+      {data.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+};
+```
+
+Important! Always add a key prop to the elements you render in a list. The key prop is used by React to identify each element in the list and to optimize the rendering process.
+
 ## Tips
 
 ### Style by separations, not by components
