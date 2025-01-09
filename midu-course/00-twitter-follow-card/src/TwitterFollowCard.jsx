@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function TwitterFollowCard({
   userName,
@@ -31,7 +31,8 @@ export default function TwitterFollowCard({
       </header>
       <aside>
         <button className={btnClassName} onClick={() => handleFollow()}>
-          {textButton}
+          <span className="tw-followCard-text">{textButton}</span>
+          <span className="tw-followCard-stopFollow">Dejar de seguir</span>
         </button>
       </aside>
     </article>
