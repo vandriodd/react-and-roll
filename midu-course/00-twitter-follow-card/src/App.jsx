@@ -7,17 +7,17 @@ export default function App() {
       <TwitterFollowCard
         userName="vandriodd"
         name="Luz Saavedra"
-        isFollowing={false}
+        initialIsFollowing={false}
       />
       <TwitterFollowCard
         userName="nachop51"
         name="Ignacio Peralta"
-        isFollowing
+        initialIsFollowing
       />
       <TwitterFollowCard
         userName="micaelapicco"
         name="Micaela Picco"
-        isFollowing
+        initialIsFollowing
       />
     </section>
   );

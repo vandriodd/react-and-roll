@@ -144,6 +144,10 @@ The props should be immutable. If we want to modify a prop, we should:
 
 If we modify the value of the prop within the child component, we are depriving React of having the security of what it renders.
 
+### Props as initial state
+
+Props as initial state only works the first time the component is rendered. If the prop _(e.g. the state of the parent component)_ changes, the state will not be updated.
+
 ### Children
 
 What is wrapped by an element, that is, what is between tags, is a children.
@@ -180,6 +184,42 @@ const Component = () => {
 ```
 
 States are the key to making components interactive and dynamic.
+
+#### Intern state
+
+An internal state is one that is at the level of each of the elements that the component creates, it is not shared between elements. That is, each element has its own state.
+
+### Virtual DOM (reconciliation)
+
+The Virtual DOM is a lightweight copy of the actual DOM. It is a JavaScript object that represents the structure of the actual DOM. React uses the Virtual DOM to optimize the rendering process.
+
+When a component's state changes, React updates the Virtual DOM instead of the actual DOM. React then compares the Virtual DOM with the actual DOM and only updates the parts of the actual DOM that have changed.
+
+#### Propagation of changes
+
+When a parent component changes its state, React propagates the changes down to its children, causing them to re-render. This is known as the propagation of changes.
+
+### Hooks
+
+What they allow you to do is add certain functionality to React components, or to be able to execute arbitrary code when certain things happen in your components, or to have some kind of functionality that can improve the performance of your components.
+
+That is, hooks are utilities that allow React to provide more functionality to your components at different points in rendering.
+
+```jsx
+import React, { useState } from "react";
+
+const Component = () => {
+  // const [state, setState] = useState(initialState);
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </>
+  );
+};
+```
 
 ## Tips
 

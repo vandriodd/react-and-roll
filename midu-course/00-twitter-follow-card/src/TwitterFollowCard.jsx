@@ -1,10 +1,20 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 
-export default function TwitterFollowCard({ userName, name, isFollowing }) {
+export default function TwitterFollowCard({
+  userName,
+  name,
+  initialIsFollowing,
+}) {
+  const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
   const textButton = isFollowing ? "Siguiendo" : "Seguir";
   const btnClassName = isFollowing
     ? "tw-followCard-button is-following"
     : "tw-followCard-button";
+
+  const handleFollow = () => {
+    setIsFollowing(!isFollowing);
+  };
 
   return (
     <article className="tw-followCard">
@@ -20,7 +30,9 @@ export default function TwitterFollowCard({ userName, name, isFollowing }) {
         </div>
       </header>
       <aside>
-        <button className={btnClassName}>{textButton}</button>
+        <button className={btnClassName} onClick={() => handleFollow()}>
+          {textButton}
+        </button>
       </aside>
     </article>
   );
@@ -29,5 +41,5 @@ export default function TwitterFollowCard({ userName, name, isFollowing }) {
 TwitterFollowCard.propTypes = {
   userName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  isFollowing: PropTypes.bool.isRequired,
+  initialIsFollowing: PropTypes.bool.isRequired,
 };
