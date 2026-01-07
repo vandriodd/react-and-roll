@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "module": "index.js",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "chance": "^1.1.13",
+    "cors": "^2.8.5",
+    "express": "^5.2.1"
+  }
+}
