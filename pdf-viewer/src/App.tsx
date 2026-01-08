@@ -17,6 +17,10 @@ function App() {
           container,
           useCDN: true,
           document: "document.pdf",
+          toolbarItems: [
+            ...NutrientViewer.defaultToolbarItems,
+            { type: "content-editor", dropdownGroup: "editor" },
+          ],
         });
       }
 
